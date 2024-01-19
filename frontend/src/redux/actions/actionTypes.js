@@ -1,0 +1,2 @@
+export const FETCH_MATCHES = 'FETCH_MATCHES';
+export const FETCH_PLAYERS = 'FETCH_PLAYERS';
