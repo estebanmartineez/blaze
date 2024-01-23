@@ -1,11 +1,12 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {LOGIN_REQUEST, loginSuccess, loginFailure} from '../actions/authActions';
-import * as authApi from '../api/authApi';
+import axios from 'axios';
 
-function* loginAsync(action) {
+function* loginAsync({payload}) {
   try {
-    const user = yield call(authApi.login, action.payload);
-    yield put(loginSuccess(user));
+    const response = yield call(axios.post, 'http://localhost:4000/login', payload);
+    const {token, user} = response.data;
+    yield put(loginSuccess(token, user));
   } catch (error) {
     yield put(loginFailure(error.message));
   }
